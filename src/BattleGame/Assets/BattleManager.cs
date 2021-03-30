@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
@@ -116,7 +117,11 @@ public class BattleManager : MonoBehaviour
                 break;
             case Battle.BattlePhase.EndBattle:
                 //You win! Nothing happens.
-                MessageBox.instance.setText("You won! Nothing happens.");
+                MessageBox.instance.setText("You won! Nothing happens. Press ESC to reset!");
+                if(Input.GetKeyDown(KeyCode.Escape))
+                {
+                    SceneManager.LoadScene(0);
+                }
                 break;
             default:
                 break;
