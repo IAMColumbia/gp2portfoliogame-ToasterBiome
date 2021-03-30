@@ -117,8 +117,12 @@ public class BattleManager : MonoBehaviour
                 break;
             case Battle.BattlePhase.EndBattle:
                 //You win! Nothing happens.
-                MessageBox.instance.setText("You won! Nothing happens. Press ESC to reset!");
+                MessageBox.instance.setText("You won! Press ESC to exit or Space to reset");
                 if(Input.GetKeyDown(KeyCode.Escape))
+                {
+                    Application.Quit();
+                }
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     SceneManager.LoadScene(0);
                 }
