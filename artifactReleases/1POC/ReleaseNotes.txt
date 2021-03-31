@@ -1,1 +1,12 @@
 Release Notes version 1 POC
+
+BattleGame is an epic battle game where you fight a goblin
+You can either attack or use one of your four special abilities
+The game ends when you kill the goblin
+The goblin is a loser and only does regular attacks because it is sad
+It also processes the goblins turn very fast because I don't have timing
+
+-Five whole different attacks to choose from
+-Goblin to fight
+-The screen is really big
+-God Unity's UI sucks
