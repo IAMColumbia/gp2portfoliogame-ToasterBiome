@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Goblin Stab
   abilityType: 0
-  targetType: 1
+  targetType: 2
   cost: 1
   damage: 3

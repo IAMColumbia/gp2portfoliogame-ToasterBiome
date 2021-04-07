@@ -70,6 +70,7 @@ public class BattleParticipant
     public void Attack(BattleParticipant target)
     {
         int power = (this.ATTACK - target.DEFENSE);
+        power = Mathf.Max(0, power);
         MessageBox.instance.setText($"{name} attacks {target.name} for {power} damage!");
         target.HP -= power;
     }
@@ -77,6 +78,7 @@ public class BattleParticipant
     public void UseAbility(BattleParticipant target, BattleAbility ability)
     {
         int power = (this.MAGICATTACK + ability.damage) - target.MAGICDEFENSE;
+        power = Mathf.Max(0, power);
         MessageBox.instance.setText($"{name} uses {ability.abilityName} on {target.name} for {power} damage!");
         target.HP -= power;
     }

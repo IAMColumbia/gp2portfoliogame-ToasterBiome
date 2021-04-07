@@ -14,6 +14,9 @@ public class CommandBox : MonoBehaviour
     public List<Button> abilityButtons;
     public List<TextMeshProUGUI> abilityTexts;
 
+    public BattleParticipant target;
+    public int chosenAbility;
+
     private void Awake()
     {
         if(instance == null)
@@ -39,19 +42,35 @@ public class CommandBox : MonoBehaviour
 
     public void AttackButtonPressed()
     {
-        BattleManager.instance.chosenAbility = 0;
+        //BattleManager.instance.chosenAbility = 0;
+        chosenAbility = 0;
         AttackButton.interactable = false;
         AbilityButton.interactable = false;
         SetAbilityButtons(false);
+        foreach(BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
+        {
+            if(comp.participant.FACTION == BattleParticipant.Faction.Enemy)
+            {
+                comp.enableSelection();
+            }
+            
+        }
     }
 
     public void AbilityPressed(int num)
     {
         Debug.Log("pressed " + num);
-        BattleManager.instance.chosenAbility = num;
+        chosenAbility = num;
         AttackButton.interactable = false;
         AbilityButton.interactable = false;
         SetAbilityButtons(false);
+        foreach (BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
+        {
+            if (comp.participant.FACTION == BattleParticipant.Faction.Enemy)
+            {
+                comp.enableSelection();
+            }
+        }
     }
 
     public void SetAbilityButtons(bool active)
@@ -60,5 +79,21 @@ public class CommandBox : MonoBehaviour
         {
             button.interactable = active;
         }
+    }
+
+    public void SetTarget(BattleParticipant target)
+    {
+        this.target = target;
+        foreach (BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
+        {
+            comp.disableSelection();
+        }
+        SetAction();
+    }
+
+    public void SetAction()
+    {
+        BattleManager.instance.target = target;
+        BattleManager.instance.chosenAbility = chosenAbility;
     }
 }

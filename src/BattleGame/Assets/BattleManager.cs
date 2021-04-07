@@ -9,17 +9,20 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager instance;
 
-    public List<BattleAbility> heroAbility;
-    public List<BattleAbility> enemyAbility;
+    public List<BattleParticipantTemplate> startPool;
+
+    public List<BattleParticipantComponent> battlerContainers;
     
     public Battle battle;
 
     public int chosenAbility = -1;
+    public BattleParticipant target;
 
-    public Slider heroHP;
-    public Slider heroMP;
-    public Slider enemyHP;
-    public Slider enemyMP;
+    public GameObject leftSide;
+    public GameObject rightSide;
+
+    public GameObject participantPrefab;
+
     void Awake()
     {
         if (instance == null)
@@ -37,13 +40,11 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
         List<BattleParticipant> pool = new List<BattleParticipant>();
-
-        BattleParticipant hero = new BattleParticipant("Hero", 50, 20, 5, 3, 1, 2, 5,BattleParticipant.Faction.Player,heroAbility);
-        BattleParticipant slime = new BattleParticipant("Goblin", 10, 5, 4, 2, 1, 2, 4, BattleParticipant.Faction.Enemy,enemyAbility);
-
-        pool.Add(hero);
-        pool.Add(slime);
-
+        foreach (BattleParticipantTemplate battlerTemplate in startPool)
+        {
+            BattleParticipant participant = Instantiate(battlerTemplate).participant;
+            pool.Add(participant);
+        }
         battle = new Battle(pool);
         SetupUI();
         RefreshUI();
@@ -65,20 +66,38 @@ public class BattleManager : MonoBehaviour
                     //player controlled
                     CommandBox.instance.AttackButton.interactable = true;
                     CommandBox.instance.AbilityButton.interactable = true;
+                    //show who's going?
+                    foreach(BattleParticipantComponent comp in battlerContainers)
+                    {
+                        if(comp.participant == battle.activeParticipant)
+                        {
+                            comp.selection.enabled = true;
+                            comp.selection.color = Color.green;
+                        }
+                    }
+
                     //wait for player input
                     if(chosenAbility != -1)
                     {
                         if (chosenAbility == 0)
                         {
-                            //normal attack
-                            battle.activeParticipant.Attack(battle.getRandomEnemy(BattleParticipant.Faction.Enemy));
+                            if(target != null)
+                            {
+                                battle.activeParticipant.Attack(target);
+                            }
+                            
                         }
                         else
                         {
-                            //ability attack
-                            battle.activeParticipant.UseAbility(battle.getRandomEnemy(BattleParticipant.Faction.Enemy), battle.activeParticipant.abilities[chosenAbility - 1]);
+                            if (target != null)
+                            {
+                                battle.activeParticipant.UseAbility(target, battle.activeParticipant.abilities[chosenAbility - 1]);
+                            }
+                            
                         }
+                        
                         chosenAbility = -1; //reset it back
+                        target = null;
                         battle.currentPhase = Battle.BattlePhase.ExecuteOrder;
                     }
 
@@ -109,6 +128,15 @@ public class BattleManager : MonoBehaviour
                     battle.currentPhase = Battle.BattlePhase.EndBattle;
                     break;
                 }
+                //reset the current person
+                foreach (BattleParticipantComponent comp in battlerContainers)
+                {
+                    if (comp.participant == battle.activeParticipant)
+                    {
+                        comp.selection.enabled = false;
+                        comp.selection.color = Color.white;
+                    }
+                }
 
                 //if not, get the next battler
                 battle.activeParticipant = battle.participants[(battle.participants.IndexOf(battle.activeParticipant) + 1) % battle.participants.Count];
@@ -134,19 +162,34 @@ public class BattleManager : MonoBehaviour
 
     public void RefreshUI()
     {
-        heroHP.value = ((float)battle.participants[0].HP / (float)battle.participants[0].MAX_HP);
-        heroMP.value = ((float)battle.participants[0].MP / (float)battle.participants[0].MAX_MP);
-        enemyHP.value = ((float)battle.participants[1].HP / (float)battle.participants[1].MAX_HP);
-        enemyMP.value = ((float)battle.participants[1].MP / (float)battle.participants[1].MAX_MP);
+        
     }
 
     public void SetupUI()
     {
+        battlerContainers = new List<BattleParticipantComponent>();
+        foreach (BattleParticipant participant in battle.participants)
+        {
+            GameObject participantObject = Instantiate(participantPrefab);
+            if(participant.FACTION == BattleParticipant.Faction.Player)
+            {
+                participantObject.transform.parent = rightSide.transform;
+            } else
+            {
+                participantObject.transform.parent = leftSide.transform;
+            }
+            BattleParticipantComponent comp = participantObject.GetComponent<BattleParticipantComponent>();
+            comp.setParticipant(participant);
+            battlerContainers.Add(comp);
+            
+        }
+        
         BattleParticipant hero = battle.participants[0];
 
         for (int i = 0; i < hero.abilities.Count; i++)
         {
             CommandBox.instance.abilityTexts[i].text = hero.abilities[i].abilityName;
         }
+        
     }
 }
