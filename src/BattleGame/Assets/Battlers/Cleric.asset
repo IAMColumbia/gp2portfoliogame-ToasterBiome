@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: New Battle Participant Template
   m_EditorClassIdentifier: 
   participant:
-    name: 
-    _hp: 0
-    MAX_HP: 0
-    MP: 0
-    MAX_MP: 0
-    ATTACK: 0
-    DEFENSE: 0
-    MAGICATTACK: 0
-    MAGICDEFENSE: 0
-    SPEED: 0
+    name: Cleric
+    _hp: 45
+    MAX_HP: 45
+    MP: 50
+    MAX_MP: 50
+    ATTACK: 3
+    DEFENSE: 3
+    MAGICATTACK: 11
+    MAGICDEFENSE: 7
+    SPEED: 3
     abilities: []
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 4be589741ff4b474fa569af6a95cbf98, type: 3}
     FACTION: 0

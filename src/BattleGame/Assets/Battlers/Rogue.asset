@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Rogue
   m_EditorClassIdentifier: 
   participant:
-    name: 
-    _hp: 0
-    MAX_HP: 0
-    MP: 0
-    MAX_MP: 0
-    ATTACK: 0
-    DEFENSE: 0
-    MAGICATTACK: 0
-    MAGICDEFENSE: 0
-    SPEED: 0
+    name: Rogue
+    _hp: 35
+    MAX_HP: 35
+    MP: 15
+    MAX_MP: 15
+    ATTACK: 11
+    DEFENSE: 1
+    MAGICATTACK: 1
+    MAGICDEFENSE: 1
+    SPEED: 6
     abilities: []
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 1a10b5bf0a3083543b901e1783e7c482, type: 3}
     FACTION: 0

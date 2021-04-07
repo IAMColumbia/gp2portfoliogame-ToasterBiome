@@ -1348,6 +1348,21 @@ MonoBehaviour:
   - {fileID: 1087351704}
   - {fileID: 968952282}
   - {fileID: 1720066248}
+  target:
+    name: 
+    _hp: 0
+    MAX_HP: 0
+    MP: 0
+    MAX_MP: 0
+    ATTACK: 0
+    DEFENSE: 0
+    MAGICATTACK: 0
+    MAGICDEFENSE: 0
+    SPEED: 0
+    abilities: []
+    sprite: {fileID: 0}
+    FACTION: 0
+  chosenAbility: 0
 --- !u!1 &1062274221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,6 +2383,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d72007cec606b714eb27a48a944f9483, type: 2}
   - {fileID: 11400000, guid: 37d716b0de40e2441b55554c6fbe87d1, type: 2}
   - {fileID: 11400000, guid: 754fdc0524290f04e875fc728574636a, type: 2}
+  - {fileID: 11400000, guid: d249ec485304ea649b8df16372f669c1, type: 2}
+  - {fileID: 11400000, guid: b6e988ef6d03f4b41b781b6f26fa336e, type: 2}
+  - {fileID: 11400000, guid: 5052e072af4ccff45aa05215f39dfcdc, type: 2}
+  battlerContainers: []
   battle:
     participants: []
     currentPhase: 0
@@ -2386,6 +2405,20 @@ MonoBehaviour:
       sprite: {fileID: 0}
       FACTION: 0
   chosenAbility: -1
+  target:
+    name: 
+    _hp: 0
+    MAX_HP: 0
+    MP: 0
+    MAX_MP: 0
+    ATTACK: 0
+    DEFENSE: 0
+    MAGICATTACK: 0
+    MAGICDEFENSE: 0
+    SPEED: 0
+    abilities: []
+    sprite: {fileID: 0}
+    FACTION: 0
   leftSide: {fileID: 1765690284}
   rightSide: {fileID: 1062274221}
   participantPrefab: {fileID: 8357039932475135446, guid: db0897704d2ae924ead8931271237dff,

@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Fighter
   m_EditorClassIdentifier: 
   participant:
-    name: 
-    _hp: 0
-    MAX_HP: 0
-    MP: 0
-    MAX_MP: 0
-    ATTACK: 0
-    DEFENSE: 0
-    MAGICATTACK: 0
-    MAGICDEFENSE: 0
-    SPEED: 0
+    name: Fighter
+    _hp: 55
+    MAX_HP: 55
+    MP: 15
+    MAX_MP: 15
+    ATTACK: 7
+    DEFENSE: 3
+    MAGICATTACK: 1
+    MAGICDEFENSE: 2
+    SPEED: 2
     abilities: []
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 2cb5400a33f990942b3e7b0156b13b86, type: 3}
     FACTION: 0
