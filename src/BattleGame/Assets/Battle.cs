@@ -14,6 +14,7 @@ public class Battle
         StartBattle,
         GiveOrder,
         ExecuteOrder,
+        Wait,
         EndBattle
     }
 
@@ -25,6 +26,7 @@ public class Battle
     {
         this.participants = participants;
         currentPhase = BattlePhase.StartBattle;
+        SortBySpeed();
     }
 
     public void SortBySpeed()
@@ -43,5 +45,20 @@ public class Battle
             }
         }
         return participantsInFaction[UnityEngine.Random.Range(0, participantsInFaction.Count)];
+    }
+
+    public bool getFactionDeath(BattleParticipant.Faction faction)
+    {
+        foreach (BattleParticipant participant in participants)
+        {
+            if (participant.FACTION == faction)
+            {
+                if(participant.HP > 0)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

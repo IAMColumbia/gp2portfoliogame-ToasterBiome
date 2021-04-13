@@ -10,6 +10,7 @@ public class CommandBox : MonoBehaviour
     public static CommandBox instance;
     public Button AttackButton;
     public Button AbilityButton;
+    public Button ItemButton;
 
     public List<Button> abilityButtons;
     public List<TextMeshProUGUI> abilityTexts;
@@ -42,33 +43,58 @@ public class CommandBox : MonoBehaviour
 
     public void AttackButtonPressed()
     {
+        StartCoroutine(BattleManager.instance.battleState.AttackButtonPressed());
         //BattleManager.instance.chosenAbility = 0;
         chosenAbility = 0;
         AttackButton.interactable = false;
         AbilityButton.interactable = false;
+        ItemButton.interactable = false;
         SetAbilityButtons(false);
-        foreach(BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
-        {
-            if(comp.participant.FACTION == BattleParticipant.Faction.Enemy)
-            {
-                comp.enableSelection();
-            }
-            
-        }
+        EnableTargetting(BattleParticipant.Faction.Enemy);
+    }
+
+    public void ItemButtonPressed()
+    {
+        StartCoroutine(BattleManager.instance.battleState.AttackButtonPressed());
+        //BattleManager.instance.chosenAbility = 0;
+        chosenAbility = 0;
+        AttackButton.interactable = false;
+        AbilityButton.interactable = false;
+        ItemButton.interactable = false;
+        SetAbilityButtons(false);
+        EnableTargetting(BattleParticipant.Faction.Player);
     }
 
     public void AbilityPressed(int num)
     {
+        StartCoroutine(BattleManager.instance.battleState.AbilityPressed(num));
         Debug.Log("pressed " + num);
         chosenAbility = num;
         AttackButton.interactable = false;
         AbilityButton.interactable = false;
+        ItemButton.interactable = false;
         SetAbilityButtons(false);
+        //EnableTargetting(BattleParticipant.Faction.Enemy);
+    }
+
+    public void EnableTargetting(BattleParticipant.Faction faction)
+    {
         foreach (BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
         {
-            if (comp.participant.FACTION == BattleParticipant.Faction.Enemy)
+            if (comp.participant.FACTION == faction)
             {
                 comp.enableSelection();
+            }
+        }
+    }
+
+    public void DisableTargetting(BattleParticipant.Faction faction)
+    {
+        foreach (BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
+        {
+            if (comp.participant.FACTION == faction)
+            {
+                comp.disableSelection();
             }
         }
     }
@@ -83,11 +109,9 @@ public class CommandBox : MonoBehaviour
 
     public void SetTarget(BattleParticipant target)
     {
+        StartCoroutine(BattleManager.instance.battleState.TargetPressed(target));
         this.target = target;
-        foreach (BattleParticipantComponent comp in BattleManager.instance.battlerContainers)
-        {
-            comp.disableSelection();
-        }
+        DisableTargetting(BattleParticipant.Faction.Enemy);
         SetAction();
     }
 

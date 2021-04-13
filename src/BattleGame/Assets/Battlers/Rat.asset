@@ -18,11 +18,12 @@ MonoBehaviour:
     MAX_HP: 5
     MP: 2
     MAX_MP: 2
-    ATTACK: 2
+    ATTACK: 5
     DEFENSE: 1
     MAGICATTACK: 0
     MAGICDEFENSE: 0
     SPEED: 4
     abilities: []
+    equipment: []
     sprite: {fileID: 21300000, guid: d3d5e83f7dd76fb44a4ee8f93b5cda7e, type: 3}
     FACTION: 1

@@ -1,0 +1,2 @@
+4/5/2021 to 4/7/2021
+Refactored Battle states from an enum in the update method to an actual state machine. It was already too clunky to work with and it was basically impossible to make graceful waiting for UI and stuff like that. This method is much better.

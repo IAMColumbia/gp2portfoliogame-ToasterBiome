@@ -1,1 +1,7 @@
 Release Notes version 2 Vertical Slice
+
+- Support for multiple enemies
+- Support for targetting with abilities
+- New overworld to walk around in!
+- Fight new enemies like the rat and the rat wizard
+- Return to the overworld once you are done with your fight

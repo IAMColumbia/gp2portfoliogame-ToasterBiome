@@ -42,6 +42,8 @@ public class BattleParticipant
 
     public List<BattleAbility> abilities;
 
+    public List<EquipmentItem> equipment;
+
     public Sprite sprite;
 
     public Faction FACTION;

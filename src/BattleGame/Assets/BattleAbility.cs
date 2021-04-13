@@ -14,7 +14,7 @@ public class BattleAbility : ScriptableObject
     }
     public enum TargetType
     {
-        Self, Ally, Enemy
+        Self, Ally, Enemy, AllyOrSelf, AllAllies, AllEnemies
     }
 
     public string abilityName;
