@@ -1,2 +1,8 @@
 4/5/2021 to 4/7/2021
 Refactored Battle states from an enum in the update method to an actual state machine. It was already too clunky to work with and it was basically impossible to make graceful waiting for UI and stuff like that. This method is much better.
+
+4/12/2021
+Don't like the overworld system, but it's there. I need to figure out a better way transfer data between the scenes or maybe load them additively. BattleScene seems slim enough that I can just pop it on top maybe.
+
+4/13/2021
+Scuffed the rest of the item system in, currently a bug where the amount doesnt have in the UI.

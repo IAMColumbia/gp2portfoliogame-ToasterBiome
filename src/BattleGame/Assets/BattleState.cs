@@ -34,6 +34,11 @@ public abstract class BattleState
         yield break;
     }
 
+    public virtual IEnumerator ItemPressed(ItemStack item)
+    {
+        yield break;
+    }
+
     public virtual IEnumerator AbilityPressed(int num)
     {
         yield break;

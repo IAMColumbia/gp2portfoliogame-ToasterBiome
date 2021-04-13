@@ -5,6 +5,7 @@ using UnityEngine;
 public class BattleStateGiveOrder : BattleState
 {
     int chosenAction;
+    ItemStack chosenItem;
     public BattleStateGiveOrder(BattleManager bm) : base(bm) { }
     public override IEnumerator Start()
     {
@@ -19,7 +20,7 @@ public class BattleStateGiveOrder : BattleState
 
         if (bm.battle.activeParticipant.FACTION != BattleParticipant.Faction.Player)
         {
-            bm.SetState(new BattleStateResolveOrder(bm, 0, bm.battle.getRandomEnemy(BattleParticipant.Faction.Player)));
+            bm.SetState(new BattleStateResolveOrder(bm, 0, bm.battle.getRandomEnemy(BattleParticipant.Faction.Player),chosenItem));
             yield break;
         }
         MessageBox.instance.setText("Please choose your action");
@@ -37,13 +38,30 @@ public class BattleStateGiveOrder : BattleState
     {
         //cool lets enable the targetting
         CommandBox.instance.EnableTargetting(BattleParticipant.Faction.Enemy);
+        CommandBox.instance.AttackButton.interactable = false;
+        CommandBox.instance.AbilityButton.interactable = false;
+        CommandBox.instance.ItemButton.interactable = false;
         yield break;
     }
 
     public override IEnumerator ItemButtonPressed()
     {
+        CommandBox.instance.AttackButton.interactable = false;
+        CommandBox.instance.AbilityButton.interactable = false;
+        CommandBox.instance.ItemButton.interactable = false;
+        Debug.Log("help");
         //selection for using an item
+        ItemBox.instance.Open();
+        
+        yield break;
+    }
+
+    public override IEnumerator ItemPressed(ItemStack item)
+    {
+        chosenAction = -1;
+        chosenItem = item;
         CommandBox.instance.EnableTargetting(BattleParticipant.Faction.Player);
+        MessageBox.instance.setText($"Use {item.item.name} on who?");
         yield break;
     }
 
@@ -51,7 +69,9 @@ public class BattleStateGiveOrder : BattleState
     {
         //enable ability buttons
         CommandBox.instance.SetAbilityButtons(true);
-
+        CommandBox.instance.AttackButton.interactable = false;
+        CommandBox.instance.AbilityButton.interactable = false;
+        CommandBox.instance.ItemButton.interactable = false;
         yield break;
     }
 
@@ -91,7 +111,7 @@ public class BattleStateGiveOrder : BattleState
         CommandBox.instance.DisableTargetting(target.FACTION);
         CommandBox.instance.SetAction();
 
-        bm.SetState(new BattleStateResolveOrder(bm, chosenAction, target));
+        bm.SetState(new BattleStateResolveOrder(bm, chosenAction, target, chosenItem));
         yield break;
     }
 }

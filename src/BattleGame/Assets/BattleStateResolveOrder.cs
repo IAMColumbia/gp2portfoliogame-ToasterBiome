@@ -6,30 +6,47 @@ public class BattleStateResolveOrder : BattleState
 {
     int chosenAction;
     BattleParticipant target;
-    public BattleStateResolveOrder(BattleManager bm, int chosenAction, BattleParticipant target) : base(bm)
+    ItemStack usedItem;
+
+    public BattleStateResolveOrder(BattleManager bm, int chosenAction, BattleParticipant target, ItemStack usedItem) : base(bm)
     {
         this.chosenAction = chosenAction;
         this.target = target;
+        this.usedItem = usedItem;
     }
+
+
+
     public override IEnumerator Start()
     {
-        MessageBox.instance.setText($"{bm.battle.activeParticipant.name} attacks {target.name}");
         yield return new WaitForSeconds(2f);
         if (chosenAction == 0)
         {
+            //Attack
             if (target != null)
             {
                 bm.battle.activeParticipant.Attack(target);
             }
 
         }
-        else
+        else if (chosenAction > 0)
         {
+            //Ability
             if (target != null)
             {
                 bm.battle.activeParticipant.UseAbility(target, bm.battle.activeParticipant.abilities[chosenAction - 1]);
             }
 
+        } else if (chosenAction == -1)
+        {
+            //Item
+            if(target != null)
+            {
+                bm.battle.activeParticipant.UseItem(target, usedItem);
+            }
+        } else
+        {
+            Debug.Log("chosenAction was invalid");
         }
 
         yield return new WaitForSeconds(1f);

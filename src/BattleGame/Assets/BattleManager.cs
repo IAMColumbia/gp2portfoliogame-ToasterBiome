@@ -25,6 +25,8 @@ public class BattleManager : MonoBehaviour
 
     public BattleState battleState;
 
+    public List<ItemStack> bag;
+
     public void SetState(BattleState state)
     {
         battleState = state;

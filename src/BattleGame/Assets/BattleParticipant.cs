@@ -79,9 +79,29 @@ public class BattleParticipant
 
     public void UseAbility(BattleParticipant target, BattleAbility ability)
     {
-        int power = (this.MAGICATTACK + ability.damage) - target.MAGICDEFENSE;
-        power = Mathf.Max(0, power);
-        MessageBox.instance.setText($"{name} uses {ability.abilityName} on {target.name} for {power} damage!");
-        target.HP -= power;
+        if(this.MP >= ability.cost)
+        {
+            int power = (this.MAGICATTACK + ability.damage) - target.MAGICDEFENSE;
+            power = Mathf.Max(0, power);
+            MessageBox.instance.setText($"{name} uses {ability.abilityName} on {target.name} for {power} damage!");
+            target.HP -= power;
+        } else
+        {
+            MessageBox.instance.setText($"{name} uses {ability.abilityName} on {target.name}! It failed!");
+        }
+        
+    }
+
+    public void UseItem(BattleParticipant target, ItemStack item)
+    {
+        MessageBox.instance.setText($"{name} uses {item.item.name} on {target.name}!");
+        if(item.item.GetType() == typeof(ConsumableItem))
+        {
+            ConsumableItem cItem = (ConsumableItem)item.item;
+            target.HP += cItem.restoreHP;
+            target.MP += cItem.restoreMP;
+        }
+        item.amount -= 1;
+        
     }
 }

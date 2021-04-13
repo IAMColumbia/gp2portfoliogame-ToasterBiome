@@ -55,14 +55,9 @@ public class CommandBox : MonoBehaviour
 
     public void ItemButtonPressed()
     {
-        StartCoroutine(BattleManager.instance.battleState.AttackButtonPressed());
+        //StartCoroutine(BattleManager.instance.battleState.AttackButtonPressed());
         //BattleManager.instance.chosenAbility = 0;
-        chosenAbility = 0;
-        AttackButton.interactable = false;
-        AbilityButton.interactable = false;
-        ItemButton.interactable = false;
-        SetAbilityButtons(false);
-        EnableTargetting(BattleParticipant.Faction.Player);
+        StartCoroutine(BattleManager.instance.battleState.ItemButtonPressed());
     }
 
     public void AbilityPressed(int num)
