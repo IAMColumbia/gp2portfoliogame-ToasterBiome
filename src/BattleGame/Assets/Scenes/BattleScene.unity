@@ -2805,6 +2805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPool:
   - {fileID: 11400000, guid: fdfbe3f5e98ee2e468f987db88899c3c, type: 2}
+  - {fileID: 11400000, guid: d249ec485304ea649b8df16372f669c1, type: 2}
   battlerContainers: []
   battle:
     participants: []

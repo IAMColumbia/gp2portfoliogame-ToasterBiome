@@ -212,6 +212,7 @@ MonoBehaviour:
     MAGICDEFENSE: 0
     SPEED: 0
     abilities: []
+    equipment: []
     sprite: {fileID: 0}
     FACTION: 0
   hpSlider: {fileID: 8357039934024514516}

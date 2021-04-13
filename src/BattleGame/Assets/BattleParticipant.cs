@@ -81,6 +81,7 @@ public class BattleParticipant
     {
         if(this.MP >= ability.cost)
         {
+            this.MP -= ability.cost;
             int power = (this.MAGICATTACK + ability.damage) - target.MAGICDEFENSE;
             power = Mathf.Max(0, power);
             MessageBox.instance.setText($"{name} uses {ability.abilityName} on {target.name} for {power} damage!");

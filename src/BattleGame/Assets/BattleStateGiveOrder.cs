@@ -23,6 +23,16 @@ public class BattleStateGiveOrder : BattleState
             bm.SetState(new BattleStateResolveOrder(bm, 0, bm.battle.getRandomEnemy(BattleParticipant.Faction.Player),chosenItem));
             yield break;
         }
+
+        //setup ability
+
+        BattleParticipant hero = bm.battle.activeParticipant;
+
+        for (int i = 0; i < hero.abilities.Count; i++)
+        {
+            CommandBox.instance.abilityTexts[i].text = hero.abilities[i].abilityName;
+        }
+
         MessageBox.instance.setText("Please choose your action");
         CommandBox.instance.AttackButton.interactable = true;
         CommandBox.instance.AbilityButton.interactable = true;
