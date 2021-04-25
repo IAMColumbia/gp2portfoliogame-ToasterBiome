@@ -6,10 +6,28 @@ using UnityEngine.Tilemaps;
 public class OverworldPlayerController : MonoBehaviour
 {
     bool isMoving = false;
+
+    public Animator animator;
+
+    public AudioSource hit;
+
+    public string currentState;
+
+    public enum PlayerFacing
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
+    public PlayerFacing direction;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        hit = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -17,19 +35,44 @@ public class OverworldPlayerController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.W))
         {
-            if(!isMoving) StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(0, 1)));
+            direction = PlayerFacing.Up;
+            if (!isMoving)
+            {
+                direction = PlayerFacing.Up;
+                StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(0, 1)));
+            }
+            
         }
         if (Input.GetKey(KeyCode.A))
         {
-            if (!isMoving) StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(-1, 0)));
+            if (!isMoving)
+            {
+                direction = PlayerFacing.Left;
+                StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(-1, 0)));
+            }
         }
         if (Input.GetKey(KeyCode.S))
         {
-            if (!isMoving) StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(0, -1)));
+            if (!isMoving)
+            {
+                direction = PlayerFacing.Down;
+                StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(0, -1)));
+            }
         }
         if (Input.GetKey(KeyCode.D))
         {
-            if (!isMoving) StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(1, 0)));
+            if (!isMoving)
+            {
+                direction = PlayerFacing.Right;
+                StartCoroutine(MoveToTile((Vector2)transform.position + new Vector2(1, 0)));
+            }
+        }
+        if(isMoving)
+        {
+            ChangeAnimationState("walk_" + direction.ToString().ToLower());
+        } else
+        {
+            ChangeAnimationState("stand_" + direction.ToString().ToLower());
         }
     }
 
@@ -46,11 +89,12 @@ public class OverworldPlayerController : MonoBehaviour
             if(!oTile.passable)
             {
                 //maybe play that pokemon OOMPH sound when you walk into something
+                hit.Play();
                 yield break;
                 
             }
         }
-        //ChangeAnimationState("Move");
+        
         isMoving = true;
         while (Vector2.Distance(transform.position, position) > 0.01f)
         {
@@ -72,7 +116,26 @@ public class OverworldPlayerController : MonoBehaviour
                 OverworldManager.instance.StartBattle(bsObject.pool);
             }
         }
-        //ChangeAnimationState("Idle");
+
+        //check if they are on a space with a mapObject
+        MapTransition[] mapTransitionObjects = GameObject.FindObjectsOfType<MapTransition>();
+        foreach (MapTransition mtObject in mapTransitionObjects)
+        {
+            if (transform.position == mtObject.transform.position)
+            {
+                OverworldManager.instance.SwitchMap(mtObject.MapName, mtObject.moveLocation);
+            }
+        }
+
         yield break;
+    }
+
+    public void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+
+        animator.Play(newState);
+
+        currentState = newState;
     }
 }

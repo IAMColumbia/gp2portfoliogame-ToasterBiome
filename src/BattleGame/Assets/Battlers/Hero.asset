@@ -22,11 +22,12 @@ MonoBehaviour:
     DEFENSE: 3
     MAGICATTACK: 1
     MAGICDEFENSE: 2
-    SPEED: 5
+    SPEED: 7
     abilities:
     - {fileID: 11400000, guid: 3d21c6f88cf7ca9448d1b618d27e9338, type: 2}
     - {fileID: 11400000, guid: 72cbea3f5963b984f933af1b9d761ce7, type: 2}
     - {fileID: 11400000, guid: c83eac3cc9ab52a42aa41959e594e9c5, type: 2}
     - {fileID: 11400000, guid: 78bbd3548312b9f41815b794c874725d, type: 2}
+    equipment: []
     sprite: {fileID: 21300000, guid: a7ef75391cafb6c4aa87ae752b381bbc, type: 3}
     FACTION: 0

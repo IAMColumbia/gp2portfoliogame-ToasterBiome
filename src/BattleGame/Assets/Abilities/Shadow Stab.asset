@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692b3c4fc35a822449166197a08e5efe, type: 3}
   m_Name: Shadow Stab
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: Shadow Stab
   abilityType: 0
-  targetType: 0
-  cost: 0
-  damage: 0
+  targetType: 2
+  cost: 4
+  damage: 10

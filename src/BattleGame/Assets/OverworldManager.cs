@@ -10,6 +10,10 @@ public class OverworldManager : MonoBehaviour
     public Tilemap tilemap;
     public BattlePool nextBattlePool;
 
+    public GameObject currentMapObject;
+
+    public GameObject player;
+
     void Awake()
     {
         if (instance == null)
@@ -64,6 +68,19 @@ public class OverworldManager : MonoBehaviour
         {
             tilemap = GameObject.FindObjectOfType<Tilemap>();
         }
+    }
 
+    public void SwitchMap(string mapName, Vector2Int playerLocation)
+    {
+        GameObject newMap = Resources.Load<GameObject>("Maps/" + mapName);
+        if(newMap)
+        {
+            Destroy(currentMapObject);
+            currentMapObject = Instantiate(newMap);
+            Debug.Log("Changed Map");
+            //move the player
+            player.transform.position = (Vector2)playerLocation;
+            tilemap = currentMapObject.GetComponentInChildren<Tilemap>();
+        }
     }
 }
