@@ -13,6 +13,7 @@ public class OverworldPlayerController : MonoBehaviour
 
     public string currentState;
 
+
     public enum PlayerFacing
     {
         Up,
@@ -123,7 +124,7 @@ public class OverworldPlayerController : MonoBehaviour
         {
             if (transform.position == mtObject.transform.position)
             {
-                OverworldManager.instance.SwitchMap(mtObject.MapName, mtObject.moveLocation);
+                OverworldManager.instance.ChangeMap(mtObject.MapName, mtObject.moveLocation);
             }
         }
 

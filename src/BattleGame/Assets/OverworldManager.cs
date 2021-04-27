@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class OverworldManager : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class OverworldManager : MonoBehaviour
     public GameObject currentMapObject;
 
     public GameObject player;
+
+    public Image fadeImage;
+    public float transitionSpeed = 2f;
 
     void Awake()
     {
@@ -81,6 +85,26 @@ public class OverworldManager : MonoBehaviour
             //move the player
             player.transform.position = (Vector2)playerLocation;
             tilemap = currentMapObject.GetComponentInChildren<Tilemap>();
+        }
+    }
+
+    public void ChangeMap(string mapName, Vector2Int playerLocation)
+    {
+        StartCoroutine(StartSwitchMap(mapName, playerLocation));
+    }
+
+    public IEnumerator StartSwitchMap(string mapName, Vector2Int playerLocation)
+    {
+        while(fadeImage.color.a < 1)
+        {
+            fadeImage.color = new Color(0, 0, 0, fadeImage.color.a + Time.deltaTime * transitionSpeed);
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchMap(mapName, playerLocation);
+        while (fadeImage.color.a > 0)
+        {
+            fadeImage.color = new Color(0, 0, 0, fadeImage.color.a - Time.deltaTime * transitionSpeed);
+            yield return new WaitForEndOfFrame();
         }
     }
 }
