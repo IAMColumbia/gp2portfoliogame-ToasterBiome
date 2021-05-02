@@ -24,6 +24,7 @@ public class BattleStateEnd : BattleState
             yield return null;
         }
 
+        bm.DestroyUI();
         OverworldManager.instance.EndBattle();
 
         yield break;

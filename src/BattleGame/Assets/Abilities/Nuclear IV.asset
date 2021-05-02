@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Nuclear IV
   abilityType: 0
-  targetType: 2
+  targetType: 5
   cost: 10
   damage: 999

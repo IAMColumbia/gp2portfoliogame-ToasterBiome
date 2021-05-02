@@ -69,6 +69,7 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(BattlePool startingPool)
     {
+        Debug.Log(startingPool);
         List<BattleParticipant> pool = new List<BattleParticipant>();
         foreach (BattleParticipantTemplate battlerTemplate in startingPool.pool)
         {
@@ -131,5 +132,17 @@ public class BattleManager : MonoBehaviour
             CommandBox.instance.abilityTexts[i].text = hero.abilities[i].abilityName;
         }
         
+    }
+
+    public void DestroyUI()
+    {
+        foreach(Transform child in leftSide.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in rightSide.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

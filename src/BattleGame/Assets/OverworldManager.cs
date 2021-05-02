@@ -18,6 +18,8 @@ public class OverworldManager : MonoBehaviour
     public Image fadeImage;
     public float transitionSpeed = 2f;
 
+    public GameObject battleObject;
+
     void Awake()
     {
         if (instance == null)
@@ -50,19 +52,26 @@ public class OverworldManager : MonoBehaviour
 
     public void StartBattle()
     {
-        SceneManager.LoadScene("BattleScene");
-
+        //SceneManager.LoadScene("BattleScene");
+        battleObject.SetActive(true);
+        BattleManager.instance.StartBattle(nextBattlePool);
     }
 
     public void StartBattle(BattlePool pool)
     {
+        /*
         SceneManager.LoadScene("BattleScene");
         nextBattlePool = pool;
+        */
+
+        battleObject.SetActive(true);
+        BattleManager.instance.StartBattle(pool);
     }
 
     public void EndBattle()
     {
-        SceneManager.LoadScene("OverworldScene");
+        battleObject.SetActive(false);
+        //SceneManager.LoadScene("OverworldScene");
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

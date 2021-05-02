@@ -34,7 +34,21 @@ public class BattleStateResolveOrder : BattleState
             //Ability
             if (target != null)
             {
-                bm.battle.activeParticipant.UseAbility(target, bm.battle.activeParticipant.abilities[chosenAction - 1]);
+                //need a better way to handle this
+                if(bm.battle.activeParticipant.abilities[chosenAction - 1].targetType == BattleAbility.TargetType.AllEnemies)
+                {
+                    foreach(BattleParticipant participant in bm.battle.participants)
+                    {
+                        if(participant.FACTION == BattleParticipant.Faction.Enemy)
+                        {
+                            bm.battle.activeParticipant.UseAbility(participant, bm.battle.activeParticipant.abilities[chosenAction - 1]);
+                        }
+                    }
+                } else
+                {
+                    bm.battle.activeParticipant.UseAbility(target, bm.battle.activeParticipant.abilities[chosenAction - 1]);
+                }
+                
             }
 
         } else if (chosenAction == -1)
