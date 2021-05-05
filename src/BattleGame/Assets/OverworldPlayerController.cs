@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class OverworldPlayerController : MonoBehaviour
+public class OverworldPlayerController : OverworldObject
 {
-    bool isMoving = false;
 
     public Animator animator;
 
@@ -75,44 +74,52 @@ public class OverworldPlayerController : MonoBehaviour
         {
             ChangeAnimationState("stand_" + direction.ToString().ToLower());
         }
-    }
 
-    private IEnumerator MoveToTile(Vector2 position)
-    {
-        //check if we can move there
-        Tilemap map = OverworldManager.instance.tilemap;
-
-        TileBase tile = map.GetTile(new Vector3Int((int)position.x - 1, (int)position.y - 1, 0));
-
-        if(tile.GetType() == typeof(OverworldTile))
+        //check for interactions
+        if(Input.GetKeyDown(KeyCode.Z) && !isMoving)
         {
-            OverworldTile oTile = (OverworldTile)tile;
-            if(!oTile.passable)
+            Debug.Log("Checking");
+            Vector2 location = transform.position;
+
+            switch (direction)
             {
-                //maybe play that pokemon OOMPH sound when you walk into something
-                hit.Play();
-                yield break;
-                
+                case PlayerFacing.Up:
+                    location += Vector2.up;
+                    break;
+                case PlayerFacing.Down:
+                    location += Vector2.down;
+                    break;
+                case PlayerFacing.Left:
+                    location += Vector2.left;
+                    break;
+                case PlayerFacing.Right:
+                    location += Vector2.right;
+                    break;
+            }
+
+            OverworldSimpleDialogue[] dialogueObjects = GameObject.FindObjectsOfType<OverworldSimpleDialogue>();
+            foreach (OverworldSimpleDialogue dObject in dialogueObjects)
+            {
+                if (location == (Vector2)dObject.transform.position)
+                {
+                    if(!dObject.currentlyTalking)
+                    {
+                        dObject.currentlyTalking = true;
+                        TextboxController.instance.SendTexts(dObject);
+                    }
+                }
             }
         }
-        
-        isMoving = true;
-        while (Vector2.Distance(transform.position, position) > 0.01f)
-        {
-            transform.position = (Vector2)transform.position + (position - (Vector2)transform.position).normalized * 4f * Time.deltaTime;
+    }
 
-            yield return new WaitForEndOfFrame();
-        }
-
-
-        transform.position = position;
-        isMoving = false;
-
+    public override IEnumerator MoveToTile(Vector2 position)
+    {
+        yield return base.MoveToTile(position);
         //check if they are on a space with a battleStart
         OverworldBattleStart[] battleStartObjects = GameObject.FindObjectsOfType<OverworldBattleStart>();
-        foreach(OverworldBattleStart bsObject in battleStartObjects)
+        foreach (OverworldBattleStart bsObject in battleStartObjects)
         {
-            if(transform.position == bsObject.transform.position)
+            if (transform.position == bsObject.transform.position)
             {
                 OverworldManager.instance.StartBattle(bsObject.pool);
             }
@@ -127,9 +134,10 @@ public class OverworldPlayerController : MonoBehaviour
                 OverworldManager.instance.ChangeMap(mtObject.MapName, mtObject.moveLocation);
             }
         }
-
         yield break;
     }
+
+    
 
     public void ChangeAnimationState(string newState)
     {

@@ -39,7 +39,7 @@ public class ItemBox : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach(ItemStack itemStack in BattleManager.instance.bag)
+        foreach(ItemStack itemStack in PlayerManager.instance.inventory)
         {
             GameObject newObject = Instantiate(slotPrefab, transform.GetChild(0).transform);
             newObject.GetComponent<ItemSlotComponent>().SetupItem(itemStack);

@@ -9,8 +9,6 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager instance;
 
-    public List<BattleParticipantTemplate> startPool;
-
     public List<BattleParticipantComponent> battlerContainers;
     
     public Battle battle;
@@ -24,8 +22,6 @@ public class BattleManager : MonoBehaviour
     public GameObject participantPrefab;
 
     public BattleState battleState;
-
-    public List<ItemStack> bag;
 
     public void SetState(BattleState state)
     {
@@ -55,10 +51,9 @@ public class BattleManager : MonoBehaviour
     public void StartBattle()
     {
         List<BattleParticipant> pool = new List<BattleParticipant>();
-        foreach (BattleParticipantTemplate battlerTemplate in startPool)
+        foreach (BattleParticipant partyBattler in PlayerManager.instance.party)
         {
-            BattleParticipant participant = Instantiate(battlerTemplate).participant;
-            pool.Add(participant);
+            pool.Add(partyBattler);
         }
         battle = new Battle(pool);
         SetupUI();
@@ -76,10 +71,9 @@ public class BattleManager : MonoBehaviour
             BattleParticipant participant = Instantiate(battlerTemplate).participant;
             pool.Add(participant);
         }
-        foreach (BattleParticipantTemplate battlerTemplate in startPool)
+        foreach (BattleParticipant partyBattler in PlayerManager.instance.party)
         {
-            BattleParticipant participant = Instantiate(battlerTemplate).participant;
-            pool.Add(participant);
+            pool.Add(partyBattler);
         }
         battle = new Battle(pool);
         SetupUI();
