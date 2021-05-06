@@ -99,28 +99,33 @@ public class TextboxController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z) && textbox.activeInHierarchy)
         {
-            if (!isWriting && !multiMessage)
+            NextLine();
+        }
+    }
+
+    public void NextLine()
+    {
+        if (!isWriting && !multiMessage)
+        {
+            CloseDialogueBox();
+            dialogue.currentlyTalking = false;
+            dialogue = null;
+        }
+
+        if (!isWriting && multiMessage)
+        {
+            if (dialogue.currentIndex == dialogue.messages.Count - 1)
             {
+                //we've reached the end, close
                 CloseDialogueBox();
                 dialogue.currentlyTalking = false;
                 dialogue = null;
             }
-
-            if(!isWriting && multiMessage)
+            else
             {
-                if (dialogue.currentIndex == dialogue.messages.Count - 1)
-                {
-                    //we've reached the end, close
-                    CloseDialogueBox();
-                    dialogue.currentlyTalking = false;
-                    dialogue = null;
-                }
-                else
-                {
-                    //still got more messages
-                    dialogue.currentIndex++;
-                    StartCoroutine(MakeText(dialogue.GetSpeech(dialogue.currentIndex)));
-                }
+                //still got more messages
+                dialogue.currentIndex++;
+                StartCoroutine(MakeText(dialogue.GetSpeech(dialogue.currentIndex)));
             }
         }
     }

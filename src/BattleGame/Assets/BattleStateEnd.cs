@@ -25,6 +25,7 @@ public class BattleStateEnd : BattleState
         }
 
         bm.DestroyUI();
+        bm.inBattle = false;
         OverworldManager.instance.EndBattle();
 
         yield break;

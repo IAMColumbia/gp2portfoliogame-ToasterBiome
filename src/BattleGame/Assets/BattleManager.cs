@@ -23,6 +23,8 @@ public class BattleManager : MonoBehaviour
 
     public BattleState battleState;
 
+    public bool inBattle = false;
+
     public void SetState(BattleState state)
     {
         battleState = state;
@@ -59,6 +61,7 @@ public class BattleManager : MonoBehaviour
         SetupUI();
         RefreshUI();
         battle.activeParticipant = battle.participants[0];
+        inBattle = true;
         SetState(new BattleStateStart(this));
     }
 
@@ -79,7 +82,7 @@ public class BattleManager : MonoBehaviour
         SetupUI();
         RefreshUI();
         battle.activeParticipant = battle.participants[0];
-        
+        inBattle = true;
         SetState(new BattleStateStart(this));
     }
 
