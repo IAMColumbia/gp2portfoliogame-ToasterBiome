@@ -9,6 +9,16 @@ public class OverworldSimpleDialogue : MonoBehaviour
     public List<string> messages;
     public int currentIndex = 0;
     public bool currentlyTalking = false;
+
+    public bool containsQuestion = false;
+
+    public string questionMessage;
+
+    public string option1;
+    public string option2;
+
+    public string response1;
+    public string response2;
     // Start is called before the first frame update
     public string GetSpeech(int index)
     {

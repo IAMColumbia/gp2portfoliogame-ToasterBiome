@@ -17,6 +17,14 @@ public class TextboxController : MonoBehaviour
     public bool isWriting = false;
     public bool multiMessage = false;
     public OverworldSimpleDialogue dialogue;
+
+
+    public TextMeshProUGUI option1text;
+    public TextMeshProUGUI option2text;
+
+    public GameObject optionBox;
+    public bool answered = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,12 +122,21 @@ public class TextboxController : MonoBehaviour
 
         if (!isWriting && multiMessage)
         {
-            if (dialogue.currentIndex == dialogue.messages.Count - 1)
+            if (dialogue.currentIndex >= dialogue.messages.Count - 1)
             {
-                //we've reached the end, close
-                CloseDialogueBox();
-                dialogue.currentlyTalking = false;
-                dialogue = null;
+                //check if there's a question
+                if (dialogue.containsQuestion && !answered)
+                {
+                    StartCoroutine(AskOptions(dialogue.questionMessage, dialogue.option1, dialogue.option2));
+                }
+                else
+                {
+                    //we've reached the end, close
+                    CloseDialogueBox();
+                    dialogue.currentlyTalking = false;
+                    dialogue = null;
+                }
+                
             }
             else
             {
@@ -138,5 +155,41 @@ public class TextboxController : MonoBehaviour
     public void CloseDialogueBox()
     {
         textbox.SetActive(false);
+    }
+
+    public void OpenOptionBox(string message, string option1, string option2)
+    {
+        option1text.text = option1;
+        option2text.text = option2;
+        SendText(message);
+        optionBox.SetActive(true);
+    }
+
+    public IEnumerator AskOptions(string message, string option1, string option2)
+    {
+        OpenOptionBox(message,option1, option2);
+        while(!answered)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        optionBox.SetActive(false);
+        //ok they answered it
+
+    }
+
+    public void OptionPressed(int button)
+    {
+        if (button == 1)
+        {
+            //option 1
+            SendText(dialogue.response1);
+            answered = true;
+        }
+        else
+        {
+            //option 2
+            SendText(dialogue.response2);
+            answered = true;
+        }
     }
 }

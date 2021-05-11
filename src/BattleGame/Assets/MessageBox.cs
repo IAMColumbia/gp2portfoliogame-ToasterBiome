@@ -14,6 +14,7 @@ public class MessageBox : MonoBehaviour
     public TextMeshProUGUI messageText;
     public bool debug = true;
 
+
     private void Awake()
     {
         if (instance == null)

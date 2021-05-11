@@ -196,9 +196,15 @@ MonoBehaviour:
   npc_color: {r: 1, g: 1, b: 0, a: 1}
   messages:
   - Joe Bofa? Of course I know that guy!
-  - Who wouldn't?
+  - 'Who wouldn''t? '
   currentIndex: 0
   currentlyTalking: 0
+  containsQuestion: 1
+  questionMessage: Do you uh... do you know who Joe is?
+  option1: Yes
+  option2: No
+  response1: Cool... I always knew you did...
+  response2: Oh.. Okay..
 --- !u!1 &4530104942249567496
 GameObject:
   m_ObjectHideFlags: 0
