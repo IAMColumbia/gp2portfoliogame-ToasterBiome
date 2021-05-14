@@ -6,3 +6,9 @@ Don't like the overworld system, but it's there. I need to figure out a better w
 
 4/13/2021
 Scuffed the rest of the item system in, currently a bug where the amount doesnt have in the UI.
+
+4/30/2021
+Did more of the overworld system, PlayerManager and moving Battles into the main scene.
+
+5/12/2021
+An actual game! Menu system, dungeon, battles, Pokemon style battle starts, etc.
