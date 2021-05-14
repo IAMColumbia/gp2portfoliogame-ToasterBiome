@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67dfec87e62fa246a816c0b33211e78, type: 3}
+  m_Name: Lavametal Slime
+  m_EditorClassIdentifier: 
+  participant:
+    name: Lavametal Slime
+    _hp: 60
+    MAX_HP: 60
+    MP: 50
+    MAX_MP: 50
+    ATTACK: 7
+    DEFENSE: 2
+    MAGICATTACK: 6
+    MAGICDEFENSE: 4
+    SPEED: 3
+    abilities: []
+    equipment: []
+    sprite: {fileID: 21300000, guid: 2b9ef4edaebc6d14999a21499e45de2f, type: 3}
+    FACTION: 1

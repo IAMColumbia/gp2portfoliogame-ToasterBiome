@@ -20,6 +20,9 @@ public class OverworldManager : MonoBehaviour
 
     public GameObject battleObject;
 
+    //locking to prevent weird stuff
+    public bool changingMap = false;
+
     void Awake()
     {
         if (instance == null)
@@ -54,6 +57,7 @@ public class OverworldManager : MonoBehaviour
     {
         //SceneManager.LoadScene("BattleScene");
         battleObject.SetActive(true);
+        player.GetComponent<OverworldPlayerController>().frozen = true;
         BattleManager.instance.StartBattle(nextBattlePool);
     }
 
@@ -65,12 +69,14 @@ public class OverworldManager : MonoBehaviour
         */
 
         battleObject.SetActive(true);
+        player.GetComponent<OverworldPlayerController>().frozen = true;
         BattleManager.instance.StartBattle(pool);
     }
 
     public void EndBattle()
     {
         battleObject.SetActive(false);
+        player.GetComponent<OverworldPlayerController>().frozen = false;
         //SceneManager.LoadScene("OverworldScene");
     }
 
@@ -86,7 +92,7 @@ public class OverworldManager : MonoBehaviour
     public void SwitchMap(string mapName, Vector2Int playerLocation)
     {
         GameObject newMap = Resources.Load<GameObject>("Maps/" + mapName);
-        if(newMap)
+        if(newMap != null)
         {
             Destroy(currentMapObject);
             currentMapObject = Instantiate(newMap);
@@ -99,11 +105,17 @@ public class OverworldManager : MonoBehaviour
 
     public void ChangeMap(string mapName, Vector2Int playerLocation)
     {
-        StartCoroutine(StartSwitchMap(mapName, playerLocation));
+        if(!changingMap)
+        {
+            changingMap = true;
+            StartCoroutine(StartSwitchMap(mapName, playerLocation));
+        }
+        
     }
 
     public IEnumerator StartSwitchMap(string mapName, Vector2Int playerLocation)
     {
+        Debug.Log("Coroutine Started");
         while(fadeImage.color.a < 1)
         {
             fadeImage.color = new Color(0, 0, 0, fadeImage.color.a + Time.deltaTime * transitionSpeed);
@@ -115,5 +127,7 @@ public class OverworldManager : MonoBehaviour
             fadeImage.color = new Color(0, 0, 0, fadeImage.color.a - Time.deltaTime * transitionSpeed);
             yield return new WaitForEndOfFrame();
         }
+        Debug.Log("Coroutine Ended");
+        changingMap = false;
     }
 }

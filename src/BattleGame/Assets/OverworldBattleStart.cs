@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverworldBattleStart : MonoBehaviour
+public class OverworldBattleStart : OverworldObject
 {
     public BattlePool pool;
     // Start is called before the first frame update
-    void Start()
+    public override void OnInteract()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        OverworldManager.instance.StartBattle(pool);
+        Destroy(gameObject);
     }
 }

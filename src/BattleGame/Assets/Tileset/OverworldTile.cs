@@ -7,4 +7,9 @@ using UnityEngine.Tilemaps;
 public class OverworldTile : Tile
 {
     public bool passable = true;
+
+    public virtual bool getPassable()
+    {
+        return passable;
+    }
 }

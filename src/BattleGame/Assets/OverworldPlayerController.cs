@@ -12,6 +12,8 @@ public class OverworldPlayerController : OverworldObject
 
     public string currentState;
 
+    public bool frozen = false;
+
 
     public enum PlayerFacing
     {
@@ -33,6 +35,10 @@ public class OverworldPlayerController : OverworldObject
     // Update is called once per frame
     void Update()
     {
+        if(frozen)
+        {
+            return;
+        }
         if(Input.GetKey(KeyCode.W))
         {
             direction = PlayerFacing.Up;
@@ -97,16 +103,12 @@ public class OverworldPlayerController : OverworldObject
                     break;
             }
 
-            OverworldSimpleDialogue[] dialogueObjects = GameObject.FindObjectsOfType<OverworldSimpleDialogue>();
-            foreach (OverworldSimpleDialogue dObject in dialogueObjects)
+            OverworldObject[] overworldObjects = GameObject.FindObjectsOfType<OverworldObject>();
+            foreach (OverworldObject oObject in overworldObjects)
             {
-                if (location == (Vector2)dObject.transform.position)
+                if (location == (Vector2)oObject.transform.position)
                 {
-                    if(!dObject.currentlyTalking)
-                    {
-                        dObject.currentlyTalking = true;
-                        TextboxController.instance.SendTexts(dObject);
-                    }
+                    oObject.OnInteract();
                 }
             }
         }
@@ -116,12 +118,18 @@ public class OverworldPlayerController : OverworldObject
     {
         yield return base.MoveToTile(position);
         //check if they are on a space with a battleStart
-        OverworldBattleStart[] battleStartObjects = GameObject.FindObjectsOfType<OverworldBattleStart>();
-        foreach (OverworldBattleStart bsObject in battleStartObjects)
+
+        //tile checker thingy
+        Tilemap map = OverworldManager.instance.tilemap;
+
+        TileBase tile = map.GetTile(new Vector3Int((int)position.x - 1, (int)position.y - 1, 0));
+
+        if (tile.GetType() == typeof(OverworldMonsterTile))
         {
-            if (transform.position == bsObject.transform.position)
+            OverworldMonsterTile mTile = (OverworldMonsterTile)tile;
+            if(Random.value < mTile.chance)
             {
-                OverworldManager.instance.StartBattle(bsObject.pool);
+                OverworldManager.instance.StartBattle(mTile.GetRandomPool());
             }
         }
 
@@ -134,6 +142,7 @@ public class OverworldPlayerController : OverworldObject
                 OverworldManager.instance.ChangeMap(mtObject.MapName, mtObject.moveLocation);
             }
         }
+
         yield break;
     }
 

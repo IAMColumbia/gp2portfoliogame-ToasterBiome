@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
 
     public List<ItemStack> inventory;
 
+    public bool canWalkOnLava = false;
+
     void Awake()
     {
         if (instance == null)

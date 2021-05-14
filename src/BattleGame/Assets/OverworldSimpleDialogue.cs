@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverworldSimpleDialogue : MonoBehaviour
+public class OverworldSimpleDialogue : OverworldObject
 {
     public string npc_name;
     public Color npc_color = Color.white;
@@ -24,7 +24,16 @@ public class OverworldSimpleDialogue : MonoBehaviour
     {
         return $"<color=#{ColorUtility.ToHtmlStringRGB(npc_color)}>{npc_name}</color>: {messages[index]}";
     }
-    
+
+    public override void OnInteract()
+    {
+        if (!currentlyTalking)
+        {
+            currentlyTalking = true;
+            TextboxController.instance.SendTexts(this);
+        }
+    }
+
     public string GetNextSpeech()
     {
         return GetSpeech(currentIndex);
