@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="Battle Participant related&#xD;&#xA;">
+    <Position X="5.594" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Battle + Battle States">
+    <Position X="10.781" Y="0.5" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Overworld Objects and handling">
+    <Position X="9.404" Y="3.857" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="BattleManager">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAwAACAAAAAAIAAIIIAAAAxAAAIIAAABRACAAEA=</HashCode>
+      <FileName>Assets\BattleManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleAbility">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="BattleAbility.AbilityType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\BattleAbility.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="BattleAbility.TargetType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\BattleAbility.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAIAAgAAAAAAAAAAAAAAQAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Assets\BattleAbility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleParticipant">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="BattleParticipant.Faction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\BattleParticipant.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAAEIQAAAAAQAAAAAAAhAAAYpEEAAAAAAAACAAgAAE=</HashCode>
+      <FileName>Assets\BattleParticipant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleParticipantComponent">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAEACBAgAAAAAAAAAAAABEAIAEAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\BattleParticipantComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleParticipantTemplate">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\BattleParticipantTemplate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battle">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Battle.BattlePhase" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Battle.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgYAAAAAAAAAAAACAAABIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Battle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OverworldObject">
+    <Position X="8.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAACAAAAAAAAAAAAAAAAAAAAAAAAABAACAAAA=</HashCode>
+      <FileName>Assets\OverworldObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OverworldHermit">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\OverworldHermit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OverworldPlayerController">
+    <Position X="6.75" Y="5.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="OverworldPlayerController.PlayerFacing" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\OverworldPlayerController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAACAAIgAAIAAAAAAAAAAAgAAAACAAAACAAAA=</HashCode>
+      <FileName>Assets\OverworldPlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OverworldSimpleDialogue">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAUAAAAAAAACAAAgAQAAAEgAAAAABADAAAAACAAA=</HashCode>
+      <FileName>Assets\OverworldSimpleDialogue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerManager">
+    <Position X="5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAQAAAAAAAAAAABAAABCAAAAAABAAEA=</HashCode>
+      <FileName>Assets\PlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OverworldChest">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAACAACAAAAAQAAAAAAAAAAhAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\OverworldChest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleState">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIIAAAAAAiAAAAIAAAAAAAAAAIAAAAAAQAAAACAAAAA=</HashCode>
+      <FileName>Assets\BattleState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="IOverworldObject">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\IOverworldObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
